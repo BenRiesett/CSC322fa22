@@ -1,0 +1,42 @@
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 1000 );
+
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+
+//Create a DirectionalLight and turn on shadows for the light
+const light = new THREE.DirectionalLight( 0xffffff, 1 );
+light.position.set( 0, 1, 0 ); //default; light shining from top
+light.castShadow = true; // default false
+scene.add( light );
+const light2 = new THREE.DirectionalLight( 0xffffff, 1 );
+light.position.set( 1, 0, 0 ); //default; light shining from top
+light.castShadow = true; // default false
+scene.add( light2 );
+const light3 = new THREE.DirectionalLight( 0xffffff, 1 );
+light.position.set( 0, 0, 1 ); //default; light shining from top
+light.castShadow = true; // default false
+scene.add( light3 );
+
+
+const planeGeometry = new THREE.TetrahedronGeometry(1);
+const planeMaterial = new THREE.MeshStandardMaterial( { color: 0x00ffff } )
+const plane = new THREE.Mesh( planeGeometry, planeMaterial );
+plane.receiveShadow = true;
+scene.add( plane );
+
+camera.position.z = 5;
+
+var animate = function () {
+	requestAnimationFrame( animate );
+
+	plane.rotation.x += 0.01;
+	plane.rotation.y += 0.01;
+
+	renderer.render( scene, camera);
+};
+
+animate();
