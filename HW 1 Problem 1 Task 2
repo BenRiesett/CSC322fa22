@@ -13,11 +13,11 @@ light.position.set( 0, 1, 0 ); //default; light shining from top
 light.castShadow = true; // default false
 scene.add( light );
 const light2 = new THREE.DirectionalLight( 0xffffff, 1 );
-light.position.set( 1, 0, 0 ); //default; light shining from top
+light.position.set( 1, 0, 0 ); 
 light.castShadow = true; // default false
 scene.add( light2 );
 const light3 = new THREE.DirectionalLight( 0xffffff, 1 );
-light.position.set( 0, 0, 1 ); //default; light shining from top
+light.position.set( 0, 0, 1 ); 
 light.castShadow = true; // default false
 scene.add( light3 );
 
