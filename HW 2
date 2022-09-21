@@ -1,0 +1,163 @@
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+
+const camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 500 );
+camera.position.set( 0, 0, 100 );
+camera.lookAt( 0, 25, 0 );
+
+const scene = new THREE.Scene();
+
+//1st SIDE RED
+const geometry = new THREE.BufferGeometry();
+// create a simple square shape. We duplicate the top left and bottom right
+// vertices because each vertex needs to appear once per triangle.
+const vertices = new Float32Array( [
+	-2.25, 0,  2.25,
+	 2.25, 0,  2.25,
+	 1.7,  50,  1.7,
+   
+   1.7,  50,  1.7,
+  -1.7,  50,  1.7,
+  -1.7, 0,  2.25,
+
+] );
+
+// itemSize = 3 because there are 3 values (components) per vertex
+geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+const material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+const mesh = new THREE.Mesh( geometry, material );
+
+//2ND SIDE BLUE
+const geometry2 = new THREE.BufferGeometry();
+const vertices2 = new Float32Array( [
+	 2.25, 0,   2.25,
+	 2.25, 0,  -2.25,
+	 1.7,  50,  -1.7,
+   
+   1.7,  50,  -1.7,
+   1.7,  50,   1.7,
+   1.7, 0,    2.25,
+
+] );
+
+
+geometry2.setAttribute( 'position', new THREE.BufferAttribute( vertices2, 3 ) );
+const material2 = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+const mesh2 = new THREE.Mesh( geometry2, material2 );
+
+//3RD SIDE GREEN
+const geometry3 = new THREE.BufferGeometry();
+const vertices3 = new Float32Array( [
+	 2.25, 0,   -2.25,
+	 -2.25, 0,  -2.25,
+	 -1.7,  50,  -1.7,
+   
+   -1.7,  50,  -1.7,
+   1.7,  50,  -1.7,
+   1.7, 0,    -2.25,
+
+] );
+
+geometry3.setAttribute( 'position', new THREE.BufferAttribute( vertices3, 3 ) );
+var side3color = new THREE.Color("green");
+const material3 = new THREE.MeshBasicMaterial( { color: side3color } );
+const mesh3 = new THREE.Mesh( geometry3, material3 );
+
+//4th SIDE BROWN
+const geometry4 = new THREE.BufferGeometry();
+const vertices4 = new Float32Array( [
+	 -2.25, 0,   -2.25,
+	 -2.25, 0,  2.25,
+	 -1.7,  50,  1.7,
+   
+   -1.7,  50,  1.7,
+   -1.7,  50,   -1.7,
+   -1.7, 0,    -2.25,
+
+] );
+
+// itemSize = 3 because there are 3 values (components) per vertex
+geometry4.setAttribute( 'position', new THREE.BufferAttribute( vertices4, 3 ) );
+var side4color = new THREE.Color(0.62, 0.32, 0);
+const material4 = new THREE.MeshBasicMaterial( { color: side4color } );
+const mesh4 = new THREE.Mesh( geometry4, material4 );
+
+//TRIANGLE 1 PURPLE
+const geometry5 = new THREE.BufferGeometry();
+const vertices5 = new Float32Array( [
+	 -1.7, 50, 1.7,
+	  1.7, 50,  1.7,
+	 0,  55.5,  0,
+
+] );
+
+// itemSize = 3 because there are 3 values (components) per vertex
+geometry5.setAttribute( 'position', new THREE.BufferAttribute( vertices5, 3 ) );
+var side5color = new THREE.Color(128, 0, 128);
+const material5 = new THREE.MeshBasicMaterial( { color: side5color } );
+const mesh5 = new THREE.Mesh( geometry5, material5 );
+
+//TRIANGLE 2 LIGHT BLUE
+const geometry6 = new THREE.BufferGeometry();
+const vertices6 = new Float32Array( [
+	 1.7, 50, 1.7,
+	 1.7, 50,  -1.7,
+	 0,  55.5,  0,
+
+] );
+
+// itemSize = 3 because there are 3 values (components) per vertex
+geometry6.setAttribute( 'position', new THREE.BufferAttribute( vertices6, 3 ) );
+const material6 = new THREE.MeshBasicMaterial( { color: 0x40E0D0 } );
+const mesh6 = new THREE.Mesh( geometry6, material6 );
+
+//TRIANGLE 3 WHITE
+const geometry7 = new THREE.BufferGeometry();
+const vertices7 = new Float32Array( [
+	 1.7, 50, -1.7,
+	 -1.7, 50,  -1.7,
+	 0,  55.5,  0,
+
+] );
+
+// itemSize = 3 because there are 3 values (components) per vertex
+geometry7.setAttribute( 'position', new THREE.BufferAttribute( vertices7, 3 ) );
+const material7 = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+const mesh7 = new THREE.Mesh( geometry7, material7 );
+
+//TRIANGLE 4 DARK PURPLE
+const geometry8 = new THREE.BufferGeometry();
+const vertices8 = new Float32Array( [
+	 -1.7, 50, -1.7,
+	 -1.7, 50,  1.7,
+	 0,  55.5,  0,
+
+] );
+
+// itemSize = 3 because there are 3 values (components) per vertex
+geometry8.setAttribute( 'position', new THREE.BufferAttribute( vertices8, 3 ) );
+const side8color = new THREE.Color("hsl(280, 89%, 39%)");
+const material8 = new THREE.MeshBasicMaterial( { color: side8color } );
+const mesh8 = new THREE.Mesh( geometry8, material8 );
+
+
+scene.add( mesh, mesh2, mesh3, mesh4, mesh5, mesh6, mesh7, mesh8 );
+
+
+var animate = function () {
+	requestAnimationFrame( animate );
+
+	mesh.rotation.y += 0.01;
+  mesh2.rotation.y += 0.01;
+  mesh3.rotation.y += 0.01;
+  mesh4.rotation.y += 0.01;
+  mesh5.rotation.y += 0.01;
+  mesh6.rotation.y += 0.01;
+  mesh7.rotation.y += 0.01;
+  mesh8.rotation.y += 0.01;
+
+	renderer.render( scene, camera );
+};
+
+animate();
